@@ -25,6 +25,35 @@ void Izpis_Stevil(const std::vector<unsigned char>& vec) {
 	}
 	output.close();
 }
+void countingSortPoBitu(vector<unsigned char>& A, int k) {
+	int n = A.size();
+	vector<unsigned char> B(n);
+	int stevec[2] = {0, 0};
+
+
+	for (int i = 0; i < n; i++) {
+		int bit = (A[i] >> k) & 1;
+		stevec[bit]++;
+	}
+
+
+	stevec[1] += stevec[0];
+
+
+	for (int i = n - 1; i >= 0; i--) {
+		int bit = (A[i] >> k) & 1;
+		B[stevec[bit] - 1] = A[i];
+		stevec[bit]--;
+	}
+
+	A = B;
+}
+
+void binarniRadixSort(vector<unsigned char>& A) {
+	for (int k = 0; k < 8; k++) {
+		countingSortPoBitu(A, k);
+	}
+}
 
 int main(int argc, char* argv[]) {
 
@@ -39,7 +68,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-
+	binarniRadixSort(A);
 
 	Izpis_Stevil(A);
 
