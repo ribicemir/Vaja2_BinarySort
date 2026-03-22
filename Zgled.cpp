@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-
+	binarniRadixSort(A);
 
 	Izpis_Stevil(A);
 
