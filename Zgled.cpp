@@ -2,43 +2,45 @@
 #include <vector>
 using namespace std;
 
-bool Branje_Stevil(vector<int> &vec, const char s[]) {
-	ifstream input(s);
-	int st;
+bool Branje_Stevil(std::vector<unsigned char>& vec, const std::string& filename) {
+	ifstream input(filename);
+	if (!input.is_open()) return false;
 
-	if (!input.is_open()) {
-		return false;
-	}
-
-	while (!input.eof()) {
-		input >> st;
-		vec.push_back(st);
-		while (isspace(input.peek())) input.get();
+	int temp;
+	while (input >> temp) {
+		vec.push_back(static_cast<unsigned char>(temp));
 	}
 	input.close();
 	return true;
 }
 
-void Izpis_Stevil(int* polje, unsigned int velikost) {
+void Izpis_Stevil(const std::vector<unsigned char>& vec) {
 	ofstream output("out.txt");
+	if (!output.is_open()) return;
 
-	for (int i = 0; i<velikost; i++)
-		output << polje[i] << ' ';
+	for (size_t i = 0; i < vec.size(); ++i) {
+		output << static_cast<int>(vec[i]);
+		if (i < vec.size() - 1) output << " ";
+	}
+	output.close();
 }
 
-int main(int argc, const char* argv[]) {
-	vector<int> A;
+int main(int argc, char* argv[]) {
 
-	if (argc < 3) return 0;
-	if (!Branje_Stevil(A, argv[2])) return 0;
+	if (argc < 2) {
+		cerr << "Uporaba: " << argv[0] << " <vhodna datoteka>" << std::endl;
+		return 1;
+	}
 
-	if (argv[1][0] == '0') {
-		//counting sort
+	vector<unsigned char> A;
+	if (!Branje_Stevil(A, argv[1])) {
+		std::cerr << "Napaka: Datoteke ni mogoče odpreti." << std::endl;
+		return 1;
 	}
-	else {
-		//Roman sort
-	}
-	Izpis_Stevil(&A[0],A.size());
+
+
+
+	Izpis_Stevil(A);
 
 	return 0;
 }
