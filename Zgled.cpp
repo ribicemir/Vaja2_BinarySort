@@ -49,6 +49,12 @@ void countingSortPoBitu(vector<unsigned char>& A, int k) {
 	A = B;
 }
 
+void binarniRadixSort(vector<unsigned char>& A) {
+	for (int k = 0; k < 8; k++) {
+		countingSortPoBitu(A, k);
+	}
+}
+
 int main(int argc, char* argv[]) {
 
 	if (argc < 2) {
