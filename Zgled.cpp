@@ -3,6 +3,7 @@
 using namespace std;
 
 bool Branje_Stevil(std::vector<unsigned char>& vec, const std::string& filename) {
+//const char zamenjamo ker je zastareli nacin
 	ifstream input(filename);
 	if (!input.is_open()) return false;
 
