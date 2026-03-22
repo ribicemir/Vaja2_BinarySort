@@ -58,13 +58,13 @@ void binarniRadixSort(vector<unsigned char>& A) {
 int main(int argc, char* argv[]) {
 
 	if (argc < 2) {
-		cerr << "Uporaba: " << argv[0] << " <vhodna datoteka>" << std::endl;
+		cerr << "Uporaba: " << argv[0] << " <vhodna datoteka>" << endl;
 		return 1;
 	}
 
 	vector<unsigned char> A;
 	if (!Branje_Stevil(A, argv[1])) {
-		std::cerr << "Napaka: Datoteke ni mogoče odpreti." << std::endl;
+		cerr << "Napaka: Datoteke ni mogoče odpreti." << endl;
 		return 1;
 	}
 
